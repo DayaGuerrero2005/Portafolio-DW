@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Design System del portafolio de Dayanara Guerrero — Tokens, tipografía, espaciados y componentes." />
+  <title>Design System — Dayanara Guerrero</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Estilos exclusivos de la página Design System */
+    .ds-back-bar {
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 0;
+      background-color: var(--surface);
+    }
+    .ds-back-bar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ds-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--transition-fast);
+    }
+    .ds-back-link:hover {
+      color: var(--text-main);
+    }
+    .ds-page-title {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .ds-hero {
+      padding: var(--space-3xl) 0 var(--space-2xl);
+      border-bottom: 1px solid var(--border);
+    }
+    .ds-hero-label {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-md);
+    }
+    .ds-hero-heading {
+      font-size: clamp(var(--text-4xl), 5vw, var(--text-7xl));
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: var(--space-lg);
+    }
+    .ds-hero-sub {
+      font-size: var(--text-lg);
+      color: var(--text-muted);
+      max-width: 60ch;
+      line-height: 1.7;
+    }
+    /* Input demo */
+    .ds-input-demo {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .ds-input-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .ds-input-label {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .ds-input-inline-demo {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid var(--text-main);
+      border-radius: 0;
+      font-family: var(--font-base);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0.2rem 0.3rem;
+      outline: none;
+      min-width: 200px;
+    }
+    .ds-input-inline-demo::placeholder {
+      color: var(--border);
+      font-weight: 400;
+    }
+    /* Card preview */
+    .ds-card-preview {
+      max-width: 340px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Back bar -->
+  <div class="ds-back-bar">
+    <div class="container">
+      <a href="index.html" class="ds-back-link" aria-label="Volver al portafolio">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        Volver al portafolio
+      </a>
+      <span class="ds-page-title">Design System v1.0</span>
+    </div>
+  </div>
+
+  <!-- Header del DS -->
+  <header role="banner" class="ds-hero">
+    <div class="container">
+      <p class="ds-hero-label">Dayanara Guerrero · Portafolio 2024</p>
+      <h1 class="ds-hero-heading">Design System</h1>
+      <p class="ds-hero-sub">
+        Tokens de diseño, tipografía, espaciados y componentes reutilizables
+        que conforman la identidad visual del portafolio. Basado en el
+        estilo <em>Tech / Bento Box</em>: minimalismo, grids explícitos y
+        tipografía geométrica.
+      </p>
+    </div>
+  </header>
+
+  <main id="main-content" class="ds-page">
+    <div class="container">
+
+      <!-- ══ 1. PALETA DE COLORES ══ -->
+      <section class="ds-section" aria-labelledby="ds-colors-title">
+        <h2 class="ds-section-title" id="ds-colors-title">01 · Paleta de colores</h2>
+
+        <div class="ds-swatches">
+
+          <div class="ds-swatch">
+            <div class="ds-swatch-block" style="background:#ffffff;" aria-label="Color blanco"></div>
+            <span class="ds-swatch-name">--bg</span>
+            <span class="ds-swatch-hex">#ffffff</span>
+          </div>
+
+          <div class="ds-swatch">
+            <div class="ds-swatch-block" style="background:#f8f9fa;" aria-label="Color superficie"></div>
+            <span class="ds-swatch-name">--surface</span>
+            <span class="ds-swatch-hex">#f8f9fa</span>
+          </div>
+
+          <div class="ds-swatch">
+            <div class="ds-swatch-block" style="background:#f1f3f5;" aria-label="Color superficie alternativa"></div>
+            <span class="ds-swatch-name">--surface-alt</span>
+            <span class="ds-swatch-hex">#f1f3f5</span>
+          </div>
+
+          <div class="ds-swatch">
+            <div class="ds-swatch-block" style="background:#111827;" aria-label="Color texto principal"></div>
+            <span class="ds-swatch-name">--text-main</span>
+            <span class="ds-swatch-hex">#111827</span>
+          </div>
+
+          <div class="ds-swatch">
+            <div class="ds-swatch-block" style="background:#6b7280;" aria-label="Color texto atenuado"></div>
+            <span class="ds-swatch-name">--text-muted</span>
+            <span class="ds-swatch-hex">#6b7280</span>
+          </div>
+
+          <div class="ds-swatch">
+            <div class="ds-swatch-block" style="background:#e5e7eb;" aria-label="Color borde"></div>
+            <span class="ds-swatch-name">--border</span>
+            <span class="ds-swatch-hex">#e5e7eb</span>
+          </div>
+
+          <div class="ds-swatch">
+            <div class="ds-swatch-block" style="background:#000000;" aria-label="Color acento"></div>
+            <span class="ds-swatch-name">--accent</span>
+            <span class="ds-swatch-hex">#000000</span>
+          </div>
+
+          <div class="ds-swatch">
+            <div class="ds-swatch-block" style="background:#374151;" aria-label="Color acento atenuado"></div>
+            <span class="ds-swatch-name">--accent-muted</span>
+            <span class="ds-swatch-hex">#374151</span>
+          </div>
+
+          <div class="ds-swatch">
+            <div class="ds-swatch-block" style="background:#16a34a;" aria-label="Color éxito"></div>
+            <span class="ds-swatch-name">--success</span>
+            <span class="ds-swatch-hex">#16a34a</span>
+          </div>
+
+          <div class="ds-swatch">
+            <div class="ds-swatch-block" style="background:#dc2626;" aria-label="Color error"></div>
+            <span class="ds-swatch-name">--error-color</span>
+            <span class="ds-swatch-hex">#dc2626</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══ 2. TIPOGRAFÍA ══ -->
+      <section class="ds-section" aria-labelledby="ds-type-title">
+        <h2 class="ds-section-title" id="ds-type-title">02 · Tipografía · Inter</h2>
+
+        <div class="ds-type-specimen">
+
+          <div class="ds-type-row">
+            <div class="ds-type-meta">
+              <span>h1 · 4.5rem</span><br>
+              <span>800 · -0.03em</span>
+            </div>
+            <h1 style="font-size:var(--text-7xl);font-weight:800;letter-spacing:-0.03em;line-height:1.05;">Aa Bb Cc</h1>
+          </div>
+
+          <div class="ds-type-row">
+            <div class="ds-type-meta">
+              <span>h2 · 3rem</span><br>
+              <span>800 · -0.03em</span>
+            </div>
+            <h2 style="font-size:var(--text-5xl);font-weight:800;letter-spacing:-0.03em;line-height:1.1;">Ingeniería de Software</h2>
+          </div>
+
+          <div class="ds-type-row">
+            <div class="ds-type-meta">
+              <span>h3 · 1.875rem</span><br>
+              <span>800 · -0.03em</span>
+            </div>
+            <h3 style="font-size:var(--text-3xl);font-weight:800;letter-spacing:-0.03em;">Sistema de Asistencia</h3>
+          </div>
+
+          <div class="ds-type-row">
+            <div class="ds-type-meta">
+              <span>h4 · 1.5rem</span><br>
+              <span>700 · -0.02em</span>
+            </div>
+            <h4 style="font-size:var(--text-2xl);font-weight:700;letter-spacing:-0.02em;">Active Directory</h4>
+          </div>
+
+          <div class="ds-type-row">
+            <div class="ds-type-meta">
+              <span>h5 · 1.25rem</span><br>
+              <span>700</span>
+            </div>
+            <h5 style="font-size:var(--text-xl);font-weight:700;">Bases de Datos</h5>
+          </div>
+
+          <div class="ds-type-row">
+            <div class="ds-type-meta">
+              <span>h6 · 1rem</span><br>
+              <span>700</span>
+            </div>
+            <h6 style="font-size:var(--text-base);font-weight:700;">Gestión Corporativa TI</h6>
+          </div>
+
+          <div class="ds-type-row">
+            <div class="ds-type-meta">
+              <span>Párrafo · 1rem</span><br>
+              <span>400 · lh 1.7</span>
+            </div>
+            <p style="font-size:var(--text-base);line-height:1.7;max-width:60ch;color:var(--text-muted);">
+              Texto de cuerpo estándar. Se usa para descripciones, párrafos de sección y
+              contenido general del portafolio. La fuente Inter provee máxima legibilidad
+              en pantalla a tamaños pequeños gracias a sus métricas geométricas precisas.
+            </p>
+          </div>
+
+          <div class="ds-type-row">
+            <div class="ds-type-meta">
+              <span>Label · 0.75rem</span><br>
+              <span>500 · uppercase</span>
+            </div>
+            <span style="font-size:var(--text-xs);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);">
+              Etiqueta de sección · Componente UI
+            </span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══ 3. ESPACIADOS ══ -->
+      <section class="ds-section" aria-labelledby="ds-space-title">
+        <h2 class="ds-section-title" id="ds-space-title">03 · Sistema de espaciados</h2>
+
+        <div class="ds-spacing-list">
+
+          <div class="ds-space-row">
+            <span class="ds-space-label">--space-xs</span>
+            <div class="ds-space-bar-wrap">
+              <div class="ds-space-bar" style="width:4px;" aria-label="Espaciado xs: 4px"></div>
+              <span class="ds-space-value">0.25rem · 4px</span>
+            </div>
+          </div>
+
+          <div class="ds-space-row">
+            <span class="ds-space-label">--space-sm</span>
+            <div class="ds-space-bar-wrap">
+              <div class="ds-space-bar" style="width:8px;" aria-label="Espaciado sm: 8px"></div>
+              <span class="ds-space-value">0.5rem · 8px</span>
+            </div>
+          </div>
+
+          <div class="ds-space-row">
+            <span class="ds-space-label">--space-md</span>
+            <div class="ds-space-bar-wrap">
+              <div class="ds-space-bar" style="width:16px;" aria-label="Espaciado md: 16px"></div>
+              <span class="ds-space-value">1rem · 16px</span>
+            </div>
+          </div>
+
+          <div class="ds-space-row">
+            <span class="ds-space-label">--space-lg</span>
+            <div class="ds-space-bar-wrap">
+              <div class="ds-space-bar" style="width:24px;" aria-label="Espaciado lg: 24px"></div>
+              <span class="ds-space-value">1.5rem · 24px</span>
+            </div>
+          </div>
+
+          <div class="ds-space-row">
+            <span class="ds-space-label">--space-xl</span>
+            <div class="ds-space-bar-wrap">
+              <div class="ds-space-bar" style="width:32px;" aria-label="Espaciado xl: 32px"></div>
+              <span class="ds-space-value">2rem · 32px</span>
+            </div>
+          </div>
+
+          <div class="ds-space-row">
+            <span class="ds-space-label">--space-2xl</span>
+            <div class="ds-space-bar-wrap">
+              <div class="ds-space-bar" style="width:48px;" aria-label="Espaciado 2xl: 48px"></div>
+              <span class="ds-space-value">3rem · 48px</span>
+            </div>
+          </div>
+
+          <div class="ds-space-row">
+            <span class="ds-space-label">--space-3xl</span>
+            <div class="ds-space-bar-wrap">
+              <div class="ds-space-bar" style="width:64px;" aria-label="Espaciado 3xl: 64px"></div>
+              <span class="ds-space-value">4rem · 64px</span>
+            </div>
+          </div>
+
+          <div class="ds-space-row">
+            <span class="ds-space-label">--space-4xl</span>
+            <div class="ds-space-bar-wrap">
+              <div class="ds-space-bar" style="width:96px;" aria-label="Espaciado 4xl: 96px"></div>
+              <span class="ds-space-value">6rem · 96px</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══ 4. COMPONENTES ══ -->
+      <section class="ds-section" aria-labelledby="ds-comp-title">
+        <h2 class="ds-section-title" id="ds-comp-title">04 · Componentes</h2>
+
+        <div class="ds-components-grid">
+
+          <!-- Botones -->
+          <div class="ds-component-block">
+            <h3 class="ds-component-label">Botones</h3>
+            <div class="ds-btn-row">
+              <button class="btn btn-primary" type="button">Primario</button>
+              <button class="btn btn-outline" type="button">Outline</button>
+              <button class="btn btn-ghost" type="button">Ghost</button>
+              <button class="btn btn-primary" type="button" disabled style="opacity:0.4;cursor:not-allowed;">Deshabilitado</button>
+            </div>
+            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-sm);">
+              Todos los botones usan <code style="font-family:monospace;font-size:0.7rem;background:var(--surface-alt);padding:0.1rem 0.3rem;border-radius:3px;">border-radius: var(--radius-full)</code>
+              y transiciones de 150ms.
+            </div>
+          </div>
+
+          <!-- Tags de skills -->
+          <div class="ds-component-block">
+            <h3 class="ds-component-label">Tags de habilidades</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">
+                <span class="skill-tag-dot skill-tag-dot--high"></span>
+                Python · Alto
+              </span>
+              <span class="skill-tag">
+                <span class="skill-tag-dot skill-tag-dot--mid"></span>
+                JavaScript · Medio
+              </span>
+              <span class="skill-tag">
+                <span class="skill-tag-dot skill-tag-dot--low"></span>
+                Docker · Aprendiendo
+              </span>
+              <span class="skill-tag">
+                <span class="skill-tag-dot skill-tag-dot--high"></span>
+                Django
+              </span>
+              <span class="skill-tag">
+                <span class="skill-tag-dot skill-tag-dot--high"></span>
+                SQL Server
+              </span>
+            </div>
+            <div style="font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-sm);">
+              Punto de color: ●negro = alto · ●gris = medio · ○borde = aprendiendo
+            </div>
+          </div>
+
+          <!-- Tarjeta de proyecto -->
+          <div class="ds-component-block">
+            <h3 class="ds-component-label">Card de proyecto</h3>
+            <div class="ds-card-preview">
+              <article class="project-card" style="animation:none;">
+                <figure class="project-card-figure">
+                  <img
+                    src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=800"
+                    alt="Vista previa de tarjeta de proyecto"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption>Desarrollo</figcaption>
+                </figure>
+                <div class="project-card-body">
+                  <h4 class="project-card-title">Sistema de Asistencia Biométrica</h4>
+                  <p class="project-card-desc">
+                    Arquitectura híbrida con geolocalización e IA para detección de anomalías.
+                  </p>
+                </div>
+                <div class="project-card-footer">
+                  <span class="project-card-tag">Python</span>
+                  <span class="project-card-tag">Django</span>
+                  <span class="project-card-tag">IA/ML</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Inputs del formulario -->
+          <div class="ds-component-block">
+            <h3 class="ds-component-label">Inputs del formulario</h3>
+            <div class="ds-input-demo">
+              <div class="ds-input-field">
+                <label class="ds-input-label" for="ds-input-name">Campo de texto (inline, estilo línea)</label>
+                <input
+                  class="ds-input-inline-demo"
+                  type="text"
+                  id="ds-input-name"
+                  placeholder="tu nombre completo"
+                />
+              </div>
+              <div class="ds-input-field">
+                <label class="ds-input-label" for="ds-input-email">Campo de email</label>
+                <input
+                  class="ds-input-inline-demo"
+                  type="email"
+                  id="ds-input-email"
+                  placeholder="tu@email.com"
+                />
+              </div>
+              <div class="ds-input-field">
+                <label class="ds-input-label" for="ds-textarea">Área de texto</label>
+                <textarea
+                  class="form-textarea"
+                  id="ds-textarea"
+                  rows="3"
+                  placeholder="Mensaje de texto largo…"
+                ></textarea>
+              </div>
+              <div style="font-size:var(--text-xs);color:var(--text-muted);">
+                Estilo: sin borde excepto <code style="font-family:monospace;font-size:0.7rem;background:var(--surface-alt);padding:0.1rem 0.3rem;border-radius:3px;">border-bottom: 2px solid var(--text-main)</code>.
+                Clase <code style="font-family:monospace;font-size:0.7rem;background:var(--surface-alt);padding:0.1rem 0.3rem;border-radius:3px;">.error</code> cambia el borde a rojo.
+              </div>
+            </div>
+          </div>
+
+          <!-- Bento cells demo -->
+          <div class="ds-component-block" style="grid-column: 1 / -1;">
+            <h3 class="ds-component-label">Bento Box — Celdas</h3>
+            <div class="bento-grid" style="grid-template-columns:repeat(3,1fr);">
+              <div class="bento-cell bento-cell--accent">
+                <p class="bento-cell-label">Acento (oscuro)</p>
+                <p class="bento-cell-title">Celda destacada</p>
+                <p class="bento-cell-body">Fondo negro, texto blanco. Ideal para highlights.</p>
+              </div>
+              <div class="bento-cell bento-cell--surface">
+                <p class="bento-cell-label">Surface (neutro)</p>
+                <div class="bento-stat">
+                  <span class="bento-stat-number">8vo</span>
+                  <span class="bento-stat-label">Semestre</span>
+                </div>
+              </div>
+              <div class="bento-cell">
+                <p class="bento-cell-label">Default (blanco)</p>
+                <p class="bento-cell-title">Celda normal</p>
+                <p class="bento-cell-body">Fondo blanco con borde de 1px sutil.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero tags / badges -->
+          <div class="ds-component-block">
+            <h3 class="ds-component-label">Hero tags</h3>
+            <div class="hero-meta">
+              <span class="hero-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Ecuador
+              </span>
+              <span class="hero-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+                UNEMI · Ing. Software
+              </span>
+              <span class="hero-tag">Disponible para prácticas</span>
+            </div>
+          </div>
+
+          <!-- Filter buttons -->
+          <div class="ds-component-block">
+            <h3 class="ds-component-label">Botones de filtro</h3>
+            <div class="filter-bar" style="margin-bottom:0;">
+              <button class="filter-btn is-active" type="button">Todos</button>
+              <button class="filter-btn" type="button">Desarrollo</button>
+              <button class="filter-btn" type="button">Hardware/IoT</button>
+              <button class="filter-btn" type="button">Infraestructura</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══ 5. BORDER RADIUS ══ -->
+      <section class="ds-section" aria-labelledby="ds-radius-title">
+        <h2 class="ds-section-title" id="ds-radius-title">05 · Border Radius</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--space-xl);align-items:flex-end;">
+
+          <div style="display:flex;flex-direction:column;gap:var(--space-sm);align-items:center;">
+            <div style="width:60px;height:60px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-sm);" aria-label="radio pequeño"></div>
+            <span style="font-size:var(--text-xs);color:var(--text-muted);">--radius-sm<br>0.25rem</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:var(--space-sm);align-items:center;">
+            <div style="width:60px;height:60px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-md);" aria-label="radio mediano"></div>
+            <span style="font-size:var(--text-xs);color:var(--text-muted);">--radius-md<br>0.5rem</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:var(--space-sm);align-items:center;">
+            <div style="width:60px;height:60px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-lg);" aria-label="radio grande"></div>
+            <span style="font-size:var(--text-xs);color:var(--text-muted);">--radius-lg<br>0.75rem</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:var(--space-sm);align-items:center;">
+            <div style="width:60px;height:60px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-xl);" aria-label="radio extra grande"></div>
+            <span style="font-size:var(--text-xs);color:var(--text-muted);">--radius-xl<br>1rem</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:var(--space-sm);align-items:center;">
+            <div style="width:60px;height:60px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-2xl);" aria-label="radio doble extra grande"></div>
+            <span style="font-size:var(--text-xs);color:var(--text-muted);">--radius-2xl<br>1.5rem</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:var(--space-sm);align-items:center;">
+            <div style="width:60px;height:60px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-full);" aria-label="radio completo (círculo/píldora)"></div>
+            <span style="font-size:var(--text-xs);color:var(--text-muted);">--radius-full<br>9999px</span>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Dayanara Guerrero</span>
+        <p class="footer-copy">Design System v1.0 · Portafolio 2024 · UNEMI</p>
+        <nav class="footer-links" aria-label="Navegación del pie de página">
+          <a href="index.html">Portafolio</a>
+          <a href="index.html#contact">Contacto</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

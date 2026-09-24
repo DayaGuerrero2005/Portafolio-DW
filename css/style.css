@@ -1351,6 +1351,18 @@ select {
   color: var(--text-muted);
 }
 
+/* Badge figcaption: fondo oscuro semitransparente en dark mode */
+[data-theme="dark"] .project-card-figure figcaption {
+  background-color: rgba(15, 23, 42, 0.88);
+  border-color: var(--border);
+  color: var(--text-main);
+}
+
+/* Título de tarjeta: asegurar contraste en dark mode */
+[data-theme="dark"] .project-card-title {
+  color: var(--text-main);
+}
+
 /* Celdas Bento */
 [data-theme="dark"] .bento-cell {
   background-color: var(--surface);

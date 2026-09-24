@@ -11,38 +11,6 @@
 const projects = [
   {
     id: 1,
-    title: 'Sistema de Asistencia Biométrica',
-    category: 'Desarrollo',
-    description:
-      'Arquitectura híbrida para control de asistencia con geolocalización e inteligencia artificial para detección de anomalías y patrones de comportamiento. Tesis de grado en curso.',
-    image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=800',
-    tags: ['Python', 'Django', 'IA/ML', 'Geolocalización', 'SQL Server'],
-    year: '2024',
-  },
-  {
-    id: 2,
-    title: 'Automatización IoT Industrial',
-    category: 'Hardware/IoT',
-    description:
-      'Sistema de llenado automatizado de líquidos integrando Arduino Nano, bombas DC de 12V y módulos relé para el control preciso de fluidos en entornos industriales.',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800',
-    tags: ['Arduino', 'C++', 'IoT', 'Electrónica', 'Automatización'],
-    year: '2023',
-  },
-  {
-    id: 3,
-    title: 'Gestión Corporativa TI',
-    category: 'Infraestructura',
-    description:
-      'Administración de Directorio Activo, implementación de políticas de grupo (GPO) y soporte L1/L2 en Cooperativa Riobamba Ltda. Gestión de redes LAN/WAN corporativas.',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800',
-    tags: ['Active Directory', 'GPO', 'Redes LAN/WAN', 'Soporte L1/L2', 'Wireshark'],
-    year: '2023',
-  },
-
-  /* ── Proyectos Colaborativos ── */
-  {
-    id: 4,
     title: 'GUIOSAD — Dashboard de Indicadores',
     category: 'Colaborativo',
     description:
@@ -53,7 +21,7 @@ const projects = [
     link: 'https://github.com/Jose2401jj/guiosad-project',
   },
   {
-    id: 5,
+    id: 2,
     title: 'SWOT Software Evaluation',
     category: 'Colaborativo',
     description:
@@ -64,7 +32,7 @@ const projects = [
     link: 'https://github.com/JavicSoftCode-01/swot_software_evaluation',
   },
   {
-    id: 6,
+    id: 3,
     title: 'OptiCut 3D — Optimizador de Cortes',
     category: 'Colaborativo',
     description:

@@ -39,6 +39,41 @@ const projects = [
     tags: ['Active Directory', 'GPO', 'Redes LAN/WAN', 'Soporte L1/L2', 'Wireshark'],
     year: '2023',
   },
+
+  /* ── Proyectos Colaborativos ── */
+  {
+    id: 4,
+    title: 'GUIOSAD — Dashboard de Indicadores',
+    category: 'Colaborativo',
+    description:
+      'Aplicación web colaborativa para visualización de indicadores de gestión y análisis de datos. Construida con React + Vite, gráficas interactivas con Recharts y exportación de reportes a PDF con jsPDF.',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800',
+    tags: ['React', 'Vite', 'Recharts', 'jsPDF', 'PapaParse', 'JavaScript'],
+    year: '2025',
+    link: 'https://github.com/Jose2401jj/guiosad-project',
+  },
+  {
+    id: 5,
+    title: 'SWOT Software Evaluation',
+    category: 'Colaborativo',
+    description:
+      'Plataforma web para evaluación sistemática de software mediante análisis FODA/SWOT. Gestión de roles (administrador/evaluador), cálculo automatizado de índices IR y PM, clasificación por factores y recomendación final A/B/C. Stack TypeScript + Node.js + PostgreSQL.',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800',
+    tags: ['TypeScript', 'Node.js', 'PostgreSQL', 'JWT', 'REST API'],
+    year: '2025',
+    link: 'https://github.com/JavicSoftCode-01/swot_software_evaluation',
+  },
+  {
+    id: 6,
+    title: 'OptiCut 3D — Optimizador de Cortes',
+    category: 'Colaborativo',
+    description:
+      'Herramienta web para optimizar el aprovechamiento de material en planchas, láminas o paneles. Algoritmo de empaquetado 2D, visualización 3D del resultado, cálculo de desperdicio, soporte de kerf y exportación a PDF.',
+    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800',
+    tags: ['JavaScript', 'Webpack', 'Algoritmos', 'Canvas 3D', 'PDF Export'],
+    year: '2025',
+    link: 'https://github.com/JavicSoftCode-01/optimizador_de_cortes',
+  },
 ];
 
 /* ─────────────────────────────────────────────────────────
@@ -125,7 +160,11 @@ function buildProjectCard(project) {
     loading: 'lazy',
     decoding: 'async',
   });
-  const figcaption = createElement('figcaption', {}, project.category);
+  /* Badge de categoría — muestra "Colaborativo" con ícono especial */
+  const badgeText = project.category === 'Colaborativo'
+    ? '🤝 ' + project.category
+    : project.category;
+  const figcaption = createElement('figcaption', {}, badgeText);
   figure.appendChild(img);
   figure.appendChild(figcaption);
 
@@ -135,11 +174,31 @@ function buildProjectCard(project) {
   body.appendChild(titleEl);
   body.appendChild(desc);
 
+  /* Footer: tags + (opcional) botón GitHub */
   const footer = createElement('div', { className: 'project-card-footer' });
+  const tagsWrap = createElement('div', { className: 'project-card-tags' });
   project.tags.forEach((tag) => {
     const tagEl = createElement('span', { className: 'project-card-tag' }, tag);
-    footer.appendChild(tagEl);
+    tagsWrap.appendChild(tagEl);
   });
+  footer.appendChild(tagsWrap);
+
+  if (project.link) {
+    const ghLink = createElement(
+      'a',
+      {
+        href: project.link,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        className: 'project-card-gh-link',
+        'aria-label': `Ver ${project.title} en GitHub`,
+      },
+      `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+      </svg> GitHub`
+    );
+    footer.appendChild(ghLink);
+  }
 
   article.appendChild(figure);
   article.appendChild(body);

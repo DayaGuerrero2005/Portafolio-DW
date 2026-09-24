@@ -1514,3 +1514,52 @@ select {
   line-height: 1.6;
 }
 
+
+/* ── 19. Project Card — GitHub Link & Tags Wrap ─────────── */
+.project-card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.project-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.project-card-gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 0.3rem 0.85rem;
+  width: fit-content;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+  margin-top: var(--space-xs);
+}
+
+.project-card-gh-link:hover {
+  color: var(--text-main);
+  border-color: var(--accent);
+  background-color: var(--surface-alt);
+}
+
+.project-card-gh-link svg {
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .project-card-gh-link {
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .project-card-gh-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}

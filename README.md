@@ -10,14 +10,16 @@ Portafolio web personal e interactivo desarrollado como proyecto académico para
    
 ## Instrucciones de Visualización  
 **Visualización Local:**  
-1. Clonar este repositorio: `git clone https://github.com/DayaGuerrero2005/TU-REPOSITORIO.git`  
+1. Clonar este repositorio: `git clone https://github.com/DayaGuerrero2005/Portafolio-DW.git`  
 2. Abrir el archivo `index.html` directamente en cualquier navegador web moderno.  
    
 **Visualización en Producción:**  
 El proyecto se encuentra desplegado y accesible a través de GitHub Pages en el siguiente enlace:  
-👉 [Pega aquí tu enlace de GitHub Pages cuando lo tengas]  
+👉(https://dayaguerrero2005.github.io/Portafolio-DW/index.html)
    
 ## Capturas del Resultado  
-*(Añade aquí las capturas de tu proyecto tras la publicación)*  
-* **Vista Principal:** `![Vista Desktop](ruta/a/tu/captura.jpg)`  
+* **Vista Principal:** `![Vista Desktop](ruta/a/tu/captura.jpg)` 
+<img width="1888" height="1025" alt="image" src="https://github.com/user-attachments/assets/518769fe-dd38-44e0-bd26-9e83ead2d4e0" />
 * **Design System:** `![Vista Design System](ruta/a/tu/captura-ds.jpg)`  
+<img width="1894" height="1028" alt="image" src="https://github.com/user-attachments/assets/d00af2a0-09ae-41f9-ac4d-89b5e7952ce6" />
+

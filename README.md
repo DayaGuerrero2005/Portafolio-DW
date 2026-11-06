@@ -1,4 +1,6 @@
 # Portafolio Profesional - Ingeniería de Software  
+
+**Ver en vivo:** https://dayaguerrero2005.github.io/Portafolio-DW/
    
 ## Descripción  
 Portafolio web personal e interactivo desarrollado como proyecto académico para el 8vo semestre de la carrera de Ingeniería de Software en la Universidad Estatal de Milagro (UNEMI). El sitio comunica información académica, perfil profesional, habilidades técnicas categorizadas y proyectos destacados (arquitectura de TI y desarrollo de software).  
@@ -15,11 +17,20 @@ Portafolio web personal e interactivo desarrollado como proyecto académico para
    
 **Visualización en Producción:**  
 El proyecto se encuentra desplegado y accesible a través de GitHub Pages en el siguiente enlace:  
-👉(https://dayaguerrero2005.github.io/Portafolio-DW/index.html)
+👉 [dayaguerrero2005.github.io/Portafolio-DW](https://dayaguerrero2005.github.io/Portafolio-DW/)
    
-## Capturas del Resultado  
-* **Vista Principal:** `![Vista Desktop](ruta/a/tu/captura.jpg)` 
-<img width="1888" height="1025" alt="image" src="https://github.com/user-attachments/assets/518769fe-dd38-44e0-bd26-9e83ead2d4e0" />
-* **Design System:** `![Vista Design System](ruta/a/tu/captura-ds.jpg)`  
-<img width="1894" height="1028" alt="image" src="https://github.com/user-attachments/assets/d00af2a0-09ae-41f9-ac4d-89b5e7952ce6" />
+## Capturas
 
+**Vista principal**
+
+<img width="1888" height="1025" alt="Vista principal del portafolio" src="https://github.com/user-attachments/assets/518769fe-dd38-44e0-bd26-9e83ead2d4e0" />
+
+**Design System**
+
+<img width="1894" height="1028" alt="Design System del portafolio" src="https://github.com/user-attachments/assets/d00af2a0-09ae-41f9-ac4d-89b5e7952ce6" />
+
+## Contacto
+
+**Dayanara Guerrero** · Estudiante de último semestre de Ingeniería de Software (UNEMI)
+
+[LinkedIn](https://www.linkedin.com/in/dayanara-guerrero-j22/) · [GitHub](https://github.com/DayaGuerrero2005) · dayanararguerreroj@outlook.es

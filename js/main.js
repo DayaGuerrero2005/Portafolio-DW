@@ -1,486 +1,128 @@
-/* =========================================================
-   PORTFOLIO – Dayanara Guerrero
-   main.js – Interactividad Principal
-   ========================================================= */
+// Portafolio de Dayanara Guerrero
+// Menú móvil, modo claro/oscuro y formulario de contacto (FormSubmit → correo).
 
-'use strict';
+(function () {
+  'use strict';
 
-/* ─────────────────────────────────────────────────────────
-   1. DATOS DE PROYECTOS
-   ───────────────────────────────────────────────────────── */
-const projects = [
-  {
-    id: 1,
-    title: 'GUIOSAD — Dashboard de Indicadores',
-    category: 'Colaborativo',
-    description:
-      'Aplicación web colaborativa para visualización de indicadores de gestión y análisis de datos. Construida con React + Vite, gráficas interactivas con Recharts y exportación de reportes a PDF con jsPDF.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800',
-    tags: ['React', 'Vite', 'Recharts', 'jsPDF', 'PapaParse', 'JavaScript'],
-    year: '2025',
-    link: 'https://github.com/Jose2401jj/guiosad-project',
-  },
-  {
-    id: 2,
-    title: 'SWOT Software Evaluation',
-    category: 'Colaborativo',
-    description:
-      'Plataforma web para evaluación sistemática de software mediante análisis FODA/SWOT. Gestión de roles (administrador/evaluador), cálculo automatizado de índices IR y PM, clasificación por factores y recomendación final A/B/C. Stack TypeScript + Node.js + PostgreSQL.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800',
-    tags: ['TypeScript', 'Node.js', 'PostgreSQL', 'JWT', 'REST API'],
-    year: '2025',
-    link: 'https://github.com/JavicSoftCode-01/swot_software_evaluation',
-  },
-  {
-    id: 3,
-    title: 'OptiCut 3D — Optimizador de Cortes',
-    category: 'Colaborativo',
-    description:
-      'Herramienta web para optimizar el aprovechamiento de material en planchas, láminas o paneles. Algoritmo de empaquetado 2D, visualización 3D del resultado, cálculo de desperdicio, soporte de kerf y exportación a PDF.',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800',
-    tags: ['JavaScript', 'Webpack', 'Algoritmos', 'Canvas 3D', 'PDF Export'],
-    year: '2025',
-    link: 'https://github.com/JavicSoftCode-01/optimizador_de_cortes',
-  },
-];
+  var CONTACT_EMAIL = 'dayanararguerreroj@outlook.es';
+  var ENDPOINT = 'https://formsubmit.co/ajax/' + CONTACT_EMAIL;
 
-/* ─────────────────────────────────────────────────────────
-   2. UTILIDADES
-   ───────────────────────────────────────────────────────── */
-
-/**
- * Crea un elemento HTML con atributos opcionales y contenido.
- * @param {string} tag
- * @param {Object} [attrs]
- * @param {string} [innerHTML]
- * @returns {HTMLElement}
- */
-function createElement(tag, attrs = {}, innerHTML = '') {
-  const el = document.createElement(tag);
-  Object.entries(attrs).forEach(([key, val]) => {
-    if (key === 'className') {
-      el.className = val;
-    } else {
-      el.setAttribute(key, val);
-    }
-  });
-  if (innerHTML) el.innerHTML = innerHTML;
-  return el;
-}
-
-/* ─────────────────────────────────────────────────────────
-   3. MENÚ RESPONSIVE (TOGGLE MÓVIL)
-   ───────────────────────────────────────────────────────── */
-function initMobileMenu() {
-  const toggle = document.getElementById('nav-toggle');
-  const mobileNav = document.getElementById('nav-mobile');
-
-  if (!toggle || !mobileNav) return;
-
-  toggle.addEventListener('click', () => {
-    const isOpen = toggle.classList.toggle('is-open');
-    mobileNav.classList.toggle('is-open', isOpen);
-    toggle.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-
-  /* Cerrar al hacer clic en un enlace */
-  mobileNav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      toggle.classList.remove('is-open');
-      mobileNav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+  /* Menú móvil */
+  var menu = document.getElementById('menu');
+  var nav = document.getElementById('nav');
+  if (menu && nav) {
+    menu.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
     });
-  });
-
-  /* Cerrar al hacer clic fuera */
-  document.addEventListener('click', (e) => {
-    if (
-      mobileNav.classList.contains('is-open') &&
-      !mobileNav.contains(e.target) &&
-      !toggle.contains(e.target)
-    ) {
-      toggle.classList.remove('is-open');
-      mobileNav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-  });
-}
-
-/* ─────────────────────────────────────────────────────────
-   4. RENDERIZADO Y FILTRO DE PROYECTOS
-   ───────────────────────────────────────────────────────── */
-
-/**
- * Genera el HTML de una tarjeta de proyecto.
- * @param {Object} project
- * @returns {HTMLElement}
- */
-function buildProjectCard(project) {
-  const article = createElement('article', { className: 'project-card' });
-
-  const figure = createElement('figure', { className: 'project-card-figure' });
-  const img = createElement('img', {
-    src: project.image,
-    alt: project.title,
-    loading: 'lazy',
-    decoding: 'async',
-  });
-  /* Badge de categoría — muestra "Colaborativo" con ícono especial */
-  const badgeText = project.category === 'Colaborativo'
-    ? '🤝 ' + project.category
-    : project.category;
-  const figcaption = createElement('figcaption', {}, badgeText);
-  figure.appendChild(img);
-  figure.appendChild(figcaption);
-
-  const body = createElement('div', { className: 'project-card-body' });
-  const titleEl = createElement('h3', { className: 'project-card-title' }, project.title);
-  const desc = createElement('p', { className: 'project-card-desc' }, project.description);
-  body.appendChild(titleEl);
-  body.appendChild(desc);
-
-  /* Footer: tags + (opcional) botón GitHub */
-  const footer = createElement('div', { className: 'project-card-footer' });
-  const tagsWrap = createElement('div', { className: 'project-card-tags' });
-  project.tags.forEach((tag) => {
-    const tagEl = createElement('span', { className: 'project-card-tag' }, tag);
-    tagsWrap.appendChild(tagEl);
-  });
-  footer.appendChild(tagsWrap);
-
-  if (project.link) {
-    const ghLink = createElement(
-      'a',
-      {
-        href: project.link,
-        target: '_blank',
-        rel: 'noopener noreferrer',
-        className: 'project-card-gh-link',
-        'aria-label': `Ver ${project.title} en GitHub`,
-      },
-      `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-      </svg> GitHub`
-    );
-    footer.appendChild(ghLink);
-  }
-
-  article.appendChild(figure);
-  article.appendChild(body);
-  article.appendChild(footer);
-
-  return article;
-}
-
-/**
- * Renderiza los proyectos filtrados en el contenedor #projects-grid.
- * @param {string} activeFilter - 'Todos' o una categoría específica.
- */
-function renderProjects(activeFilter = 'Todos') {
-  const grid = document.getElementById('projects-grid');
-  if (!grid) return;
-
-  const filtered =
-    activeFilter === 'Todos'
-      ? projects
-      : projects.filter((p) => p.category === activeFilter);
-
-  /* Limpiar el grid */
-  grid.innerHTML = '';
-
-  if (filtered.length === 0) {
-    const empty = createElement(
-      'p',
-      { style: 'color:var(--text-muted);font-size:var(--text-sm);grid-column:1/-1;' },
-      'No hay proyectos en esta categoría.'
-    );
-    grid.appendChild(empty);
-    return;
-  }
-
-  filtered.forEach((project) => {
-    const card = buildProjectCard(project);
-    grid.appendChild(card);
-  });
-}
-
-/**
- * Inicializa los botones de filtro y el renderizado inicial.
- */
-function initProjectFilters() {
-  const filterBar = document.getElementById('filter-bar');
-  if (!filterBar) return;
-
-  const buttons = filterBar.querySelectorAll('.filter-btn');
-
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      /* Quitar is-active de todos */
-      buttons.forEach((b) => b.classList.remove('is-active'));
-      /* Activar el clicado */
-      btn.classList.add('is-active');
-      const filter = btn.dataset.filter;
-      renderProjects(filter);
+    nav.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        nav.classList.remove('open');
+        menu.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-label', 'Abrir menú');
+      }
     });
-  });
-
-  /* Render inicial: mostrar todos */
-  renderProjects('Todos');
-}
-
-/* ─────────────────────────────────────────────────────────
-   5. VALIDACIÓN DE FORMULARIO
-   ───────────────────────────────────────────────────────── */
-const REGEX = {
-  email: /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/,
-  name:  /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s'-]{2,}$/,
-};
-
-/**
- * Aplica o quita el estado de error a un input y su mensaje de error asociado.
- * @param {HTMLElement} input
- * @param {HTMLElement|null} errorEl
- * @param {boolean} hasError
- * @param {string} [msg]
- */
-function setFieldError(input, errorEl, hasError, msg = '') {
-  if (hasError) {
-    input.classList.add('error');
-    if (errorEl) {
-      errorEl.textContent = msg;
-      errorEl.classList.add('is-visible');
-    }
-  } else {
-    input.classList.remove('error');
-    if (errorEl) {
-      errorEl.textContent = '';
-      errorEl.classList.remove('is-visible');
-    }
   }
-}
 
-/**
- * Muestra un banner de feedback en el formulario.
- * @param {HTMLElement} form
- * @param {'success'|'error'} type
- * @param {string} message
- */
-function showFormFeedback(form, type, message) {
-  /* Eliminar feedbacks anteriores */
-  const prev = form.querySelectorAll('.form-feedback');
-  prev.forEach((el) => el.remove());
-
-  const icon = type === 'success' ? '✓' : '✗';
-  const feedback = createElement(
-    'div',
-    { className: `form-feedback form-feedback--${type} is-visible`, role: 'alert' },
-    `<span>${icon}</span><span>${message}</span>`
-  );
-  form.appendChild(feedback);
-
-  if (type === 'success') {
-    setTimeout(() => {
-      feedback.classList.remove('is-visible');
-    }, 6000);
+  /* Modo claro / oscuro */
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('theme');
+  function currentTheme() {
+    var set = root.getAttribute('data-theme');
+    if (set) return set;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
-}
+  function labelTheme() {
+    if (!themeBtn) return;
+    themeBtn.setAttribute('aria-label', currentTheme() === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+  }
+  if (themeBtn) {
+    labelTheme();
+    themeBtn.addEventListener('click', function () {
+      var next = currentTheme() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('dg-theme', next); } catch (e) {}
+      labelTheme();
+    });
+  }
 
-/**
- * Valida y procesa el envío del formulario de contacto.
- */
-function initContactForm() {
-  const form = document.getElementById('contact-form');
+  /* Formulario de contacto */
+  var form = document.getElementById('contact-form');
   if (!form) return;
+  var status = document.getElementById('f-status');
+  var submit = document.getElementById('f-submit');
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-  const nameInput    = form.querySelector('#field-name');
-  const emailInput   = form.querySelector('#field-email');
-  const subjectInput = form.querySelector('#field-subject');
-  const messageInput = form.querySelector('#field-message');
+  var rules = [
+    { id: 'f-name', err: 'e-name', check: function (v) { return v.length >= 2 ? '' : 'Escribe tu nombre.'; } },
+    { id: 'f-email', err: 'e-email', check: function (v) { return EMAIL_RE.test(v) ? '' : 'Escribe un correo válido, por ejemplo nombre@empresa.com.'; } },
+    { id: 'f-message', err: 'e-message', check: function (v) { return v.length >= 10 ? '' : 'El mensaje necesita al menos 10 caracteres.'; } }
+  ];
 
-  const nameError    = form.querySelector('#error-name');
-  const emailError   = form.querySelector('#error-email');
-  const subjectError = form.querySelector('#error-subject');
-  const messageError = form.querySelector('#error-message');
-
-  /* Limpiar errores en tiempo real al escribir */
-  [nameInput, emailInput, subjectInput, messageInput].forEach((input) => {
-    if (!input) return;
-    input.addEventListener('input', () => {
-      input.classList.remove('error');
+  function validate() {
+    var firstBad = null;
+    rules.forEach(function (r) {
+      var input = document.getElementById(r.id);
+      var msg = r.check(input.value.trim());
+      document.getElementById(r.err).textContent = msg;
+      input.closest('.field').classList.toggle('invalid', !!msg);
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (msg && !firstBad) firstBad = input;
     });
-  });
+    if (firstBad) firstBad.focus();
+    return !firstBad;
+  }
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
+    status.className = 'form-status';
+    status.textContent = '';
+    if (!validate()) return;
+    if (form.elements._honey.value) return; // bot
 
-    let isValid = true;
+    var name = form.elements.name.value.trim();
+    var data = {
+      name: name,
+      email: form.elements.email.value.trim(),
+      message: form.elements.message.value.trim(),
+      _subject: 'Nuevo mensaje desde tu portafolio: ' + name,
+      _template: 'table',
+      _replyto: form.elements.email.value.trim()
+    };
 
-    /* Validar nombre */
-    const nameVal = (nameInput ? nameInput.value : '').trim();
-    if (!nameVal || !REGEX.name.test(nameVal)) {
-      setFieldError(nameInput, nameError, true, 'Por favor ingresa un nombre válido (mín. 2 caracteres).');
-      isValid = false;
-    } else {
-      setFieldError(nameInput, nameError, false);
-    }
+    submit.disabled = true;
+    submit.textContent = 'Enviando…';
 
-    /* Validar email */
-    const emailVal = (emailInput ? emailInput.value : '').trim();
-    if (!emailVal || !REGEX.email.test(emailVal)) {
-      setFieldError(emailInput, emailError, true, 'Ingresa un correo electrónico válido (ej: tu@email.com).');
-      isValid = false;
-    } else {
-      setFieldError(emailInput, emailError, false);
-    }
-
-    /* Validar asunto */
-    const subjectVal = (subjectInput ? subjectInput.value : '').trim();
-    if (!subjectVal || subjectVal.length < 3) {
-      setFieldError(subjectInput, subjectError, true, 'El asunto debe tener al menos 3 caracteres.');
-      isValid = false;
-    } else {
-      setFieldError(subjectInput, subjectError, false);
-    }
-
-    /* Validar mensaje */
-    const messageVal = (messageInput ? messageInput.value : '').trim();
-    if (!messageVal || messageVal.length < 10) {
-      setFieldError(messageInput, messageError, true, 'El mensaje debe tener al menos 10 caracteres.');
-      isValid = false;
-    } else {
-      setFieldError(messageInput, messageError, false);
-    }
-
-    if (!isValid) {
-      showFormFeedback(form, 'error', 'Por favor corrige los campos marcados antes de enviar.');
-      /* Enfocar el primer campo con error */
-      const firstError = form.querySelector('.form-input.error');
-      if (firstError) firstError.focus();
-      return;
-    }
-
-    /* ── Simulación de envío exitoso ── */
-    const submitBtn = form.querySelector('[type="submit"]');
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando…';
-    }
-
-    setTimeout(() => {
-      showFormFeedback(
-        form,
-        'success',
-        `¡Gracias ${nameVal}! Tu mensaje fue enviado. Te responderé pronto.`
-      );
-      form.reset();
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Enviar mensaje';
-      }
-    }, 1200);
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, body: j }; }); })
+      .then(function (r) {
+        if (!r.ok || String(r.body.success) === 'false') throw new Error(r.body.message || 'error');
+        form.reset();
+        status.className = 'form-status ok';
+        status.textContent = 'Mensaje enviado. Te responderé a tu correo pronto.';
+      })
+      .catch(function () {
+        status.className = 'form-status bad';
+        status.innerHTML = 'No se pudo enviar. Revisa tu conexión e inténtalo de nuevo, o escríbeme a <a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>.';
+      })
+      .then(function () {
+        submit.disabled = false;
+        submit.textContent = 'Enviar mensaje';
+      });
   });
-}
 
-/* ─────────────────────────────────────────────────────────
-   6. SMOOTH SCROLL PARA ANCLAJES
-   ───────────────────────────────────────────────────────── */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+  rules.forEach(function (r) {
+    var input = document.getElementById(r.id);
+    input.addEventListener('blur', function () {
+      if (!input.value) return;
+      var msg = r.check(input.value.trim());
+      document.getElementById(r.err).textContent = msg;
+      input.closest('.field').classList.toggle('invalid', !!msg);
     });
   });
-}
-
-/* ─────────────────────────────────────────────────────────
-   7. INTERSECTION OBSERVER – Animación de entrada
-   ───────────────────────────────────────────────────────── */
-function initScrollReveal() {
-  if (!('IntersectionObserver' in window)) return;
-
-  const style = document.createElement('style');
-  style.textContent = `
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .reveal.is-revealed { opacity: 1; transform: translateY(0); }
-  `;
-  document.head.appendChild(style);
-
-  const targets = document.querySelectorAll('.bento-cell, .skill-category, .section-header');
-  targets.forEach((el) => el.classList.add('reveal'));
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-  );
-
-  targets.forEach((el) => observer.observe(el));
-}
-
-/* ─────────────────────────────────────────────────────────
-   8. MODO OSCURO / CLARO – Persistencia en localStorage
-   ───────────────────────────────────────────────────────── */
-function initThemeToggle() {
-  const btn = document.getElementById('theme-toggle');
-  if (!btn) return;
-
-  const STORAGE_KEY = 'dg-portfolio-theme';
-  const html = document.documentElement;
-
-  /**
-   * Aplica el tema al <html> y actualiza el icono del botón.
-   * @param {'dark'|'light'} theme
-   */
-  function applyTheme(theme) {
-    if (theme === 'dark') {
-      html.setAttribute('data-theme', 'dark');
-      btn.textContent = '☀️';
-      btn.setAttribute('aria-label', 'Cambiar a tema claro');
-    } else {
-      html.removeAttribute('data-theme');
-      btn.textContent = '🌓';
-      btn.setAttribute('aria-label', 'Cambiar a tema oscuro');
-    }
-  }
-
-  /* Leer preferencia guardada; si no hay, respetar preferencia del SO */
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    applyTheme(saved);
-  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    applyTheme('dark');
-  }
-
-  /* Toggle al hacer clic */
-  btn.addEventListener('click', () => {
-    const isDark = html.hasAttribute('data-theme');
-    const next = isDark ? 'light' : 'dark';
-    applyTheme(next);
-    localStorage.setItem(STORAGE_KEY, next);
-  });
-}
-
-/* ─────────────────────────────────────────────────────────
-   9. INICIALIZACIÓN
-   ───────────────────────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', () => {
-  initThemeToggle();   /* ← primero para evitar flash de tema incorrecto */
-  initMobileMenu();
-  initProjectFilters();
-  initContactForm();
-  initSmoothScroll();
-  initScrollReveal();
-});
+})();

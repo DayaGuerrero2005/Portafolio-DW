@@ -4,8 +4,6 @@
 (function () {
   'use strict';
 
-  var CONTACT_EMAIL = 'dayanararguerreroj@outlook.es';
-  var ENDPOINT = 'https://formsubmit.co/ajax/' + CONTACT_EMAIL;
 
   /* Menú móvil */
   var menu = document.getElementById('menu');
@@ -74,61 +72,24 @@
     return !firstBad;
   }
 
+  // Al volver de FormSubmit (?enviado=1) se confirma el envío.
+  if (/[?&]enviado=1/.test(window.location.search)) {
+    status.className = 'form-status ok';
+    status.textContent = 'Mensaje enviado. Te responderé a tu correo pronto.';
+    try { history.replaceState(null, '', window.location.pathname + '#contacto'); } catch (e) {}
+  }
+
+  // Envío normal del formulario (sin fetch), para que ningún bloqueador lo corte.
   form.addEventListener('submit', function (e) {
-    e.preventDefault();
     status.className = 'form-status';
     status.textContent = '';
-    if (!validate()) return;
-    if (form.elements._honey.value) return; // bot
-
-    var name = form.elements.name.value.trim();
-    var data = {
-      name: name,
-      email: form.elements.email.value.trim(),
-      message: form.elements.message.value.trim(),
-      _subject: 'Nuevo mensaje desde tu portafolio: ' + name,
-      _template: 'table',
-      _replyto: form.elements.email.value.trim()
-    };
-
+    if (!validate() || form.elements._honey.value) { e.preventDefault(); return; }
+    form.elements._subject.value = 'Nuevo mensaje desde tu portafolio: ' + form.elements.name.value.trim();
+    var replyTo = form.querySelector('input[name="_replyto"]');
+    if (!replyTo) { replyTo = document.createElement('input'); replyTo.type = 'hidden'; replyTo.name = '_replyto'; form.appendChild(replyTo); }
+    replyTo.value = form.elements.email.value.trim();
     submit.disabled = true;
     submit.textContent = 'Enviando…';
-
-    fetch(ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(function (res) { return res.json().then(function (j) { return { ok: res.ok, body: j }; }); })
-      .then(function (r) {
-        if (!r.ok || String(r.body.success) === 'false') throw new Error(r.body.message || 'error');
-        form.reset();
-        status.className = 'form-status ok';
-        status.textContent = 'Mensaje enviado. Te responderé a tu correo pronto.';
-      })
-      .catch(function (err) {
-        status.className = 'form-status bad';
-        var msg = String((err && err.message) || 'sin respuesta');
-        var mail = 'mailto:' + CONTACT_EMAIL +
-          '?subject=' + encodeURIComponent('Contacto desde tu portafolio: ' + name) +
-          '&body=' + encodeURIComponent(data.message + '\n\n' + name + ' (' + data.email + ')');
-        status.innerHTML = '';
-        var p1 = document.createElement('span');
-        p1.textContent = /activat/i.test(msg)
-          ? 'El formulario aún no está activado. Mientras tanto, puedes enviarme el mensaje por correo: '
-          : 'No se pudo enviar desde aquí. Puedes enviarme el mismo mensaje por correo: ';
-        var a = document.createElement('a');
-        a.href = mail;
-        a.textContent = 'abrir mi correo con este mensaje';
-        var d = document.createElement('small');
-        d.className = 'form-detail';
-        d.textContent = 'Detalle: ' + msg;
-        status.appendChild(p1); status.appendChild(a); status.appendChild(d);
-      })
-      .then(function () {
-        submit.disabled = false;
-        submit.textContent = 'Enviar mensaje';
-      });
   });
 
   rules.forEach(function (r) {

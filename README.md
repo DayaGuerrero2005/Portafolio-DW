@@ -10,7 +10,7 @@ Portafolio profesional de Dayanara Guerrero, estudiante de último semestre de I
 * **CSS3:** diseño responsivo con CSS Grid y Flexbox, variables CSS para el sistema de color y modo claro/oscuro (respeta la preferencia del sistema).  
 * **JavaScript:** menú móvil, cambio de tema con `localStorage` y validación del formulario.  
 * **FormSubmit:** envío de los mensajes del formulario al correo, sin servidor propio.  
-* **Tipografías:** Bricolage Grotesque e Instrument Sans (Google Fonts).  
+* **Tipografías:** Source Serif 4 e IBM Plex Sans (Google Fonts).  
    
 ## Instrucciones de Visualización  
 **Visualización Local:**  

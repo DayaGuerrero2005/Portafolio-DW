@@ -1,6 +1,6 @@
 /* Portafolio de Dayanara Guerrero
-   Paleta: blanco, grafito y un vino oscuro como único acento.
-   Tipos: Source Serif 4 (títulos) e IBM Plex Sans (texto). */
+   Estilo minimalista: blanco, grafito y negro.
+   Tipo: Inter. */
 
 :root {
   --paper: #ffffff;
@@ -8,21 +8,21 @@
   --ink: #1d1d1f;
   --muted: #5c5f66;
   --line: #e3e3e1;
-  --signal: #7a1f2b;
+  --signal: #1d1d1f;
   --signal-ink: #ffffff;
   --focus: #2b5fb4;
   --deep: #232326;
   --on-deep: #f2f2f0;
 
-  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
-  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --step--1: 0.875rem;
   --step-0: 1rem;
   --step-1: 1.25rem;
   --step-2: 1.6rem;
   --step-3: clamp(2rem, 4vw, 2.75rem);
-  --step-hero: clamp(3.5rem, 9.2vw, 6rem);
+  --step-hero: clamp(2.6rem, 6vw, 4.5rem);
 
   --wrap: 1120px;
   --gutter: clamp(16px, 4vw, 40px);
@@ -36,7 +36,7 @@
   --ink: #ededeb;
   --muted: #a7a8ad;
   --line: #303034;
-  --signal: #d98a94;
+  --signal: #ededeb;
   --signal-ink: #161618;
   --focus: #8fb0ff;
   --deep: #0f0f10;
@@ -51,7 +51,7 @@
     --ink: #ededeb;
     --muted: #a7a8ad;
     --line: #303034;
-    --signal: #d98a94;
+    --signal: #ededeb;
     --signal-ink: #161618;
     --focus: #8fb0ff;
     --deep: #0f0f10;
@@ -119,34 +119,19 @@ p { margin: 0; }
 
 /* Hero */
 .hero { padding: clamp(40px, 7vw, 88px) 0 clamp(56px, 8vw, 104px); overflow: hidden; }
-.hero-head { padding-bottom: clamp(28px, 4vw, 44px); border-bottom: 1px solid var(--line); margin-bottom: clamp(32px, 5vw, 56px); }
+.hero-grid { display: grid; grid-template-columns: 1fr auto; gap: clamp(32px, 6vw, 80px); align-items: center; }
+.status { display: inline-flex; align-items: baseline; gap: 10px; font-size: var(--step--1); color: var(--muted); font-weight: 500; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #2e8b57; }
 .hero-name {
   font-size: var(--step-hero);
-  font-weight: 700;
-  font-variation-settings: "opsz" 60;
-  letter-spacing: -0.03em;
-  line-height: 0.98;
-  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  margin: 18px 0 14px;
   text-wrap: balance;
 }
-.hero-name span { display: inline-block; }
-.hero-name span + span { color: var(--signal); }
-.hero-title {
-  margin-top: clamp(14px, 2vw, 22px);
-  font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2.2vw, 1.65rem);
-  font-weight: 500;
-  font-variation-settings: "opsz" 24;
-  line-height: 1.35;
-  letter-spacing: -0.005em;
-  color: var(--ink);
-  text-wrap: balance;
-}
-.hero-title .sep { color: var(--muted); padding: 0 .35em; }
-.hero-grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
-.status { display: inline-flex; align-items: baseline; gap: 10px; font-size: var(--step--1); color: var(--muted); font-weight: 500; margin-bottom: 14px; }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: #2e8b57; }
-.hero-role { font-size: var(--step-1); font-weight: 500; max-width: 40ch; }
+.hero-title { font-size: var(--step-1); font-weight: 500; line-height: 1.4; color: var(--ink); text-wrap: balance; }
+.hero-role { color: var(--muted); margin-top: 6px; }
 .hero-lead { color: var(--muted); max-width: 54ch; margin-top: 12px; font-size: 1.05rem; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .hero-links { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: var(--step--1); }
@@ -155,9 +140,9 @@ p { margin: 0; }
 
 .hero-photo { margin: 0; }
 .hero-photo img {
-  width: clamp(180px, 20vw, 240px); height: auto; aspect-ratio: 1; object-fit: cover;
+  width: clamp(220px, 26vw, 340px); height: auto; aspect-ratio: 1; object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 0 0 1px var(--line), 0 0 0 10px var(--paper), 0 0 0 11px var(--line);
+  background: var(--surface);
 }
 
 /* Bloque de enfoque */
@@ -287,9 +272,8 @@ p { margin: 0; }
   .nav.open { display: flex; }
   .nav a { padding: 12px 0; font-size: var(--step-0); color: var(--ink); }
   .hero-grid { grid-template-columns: 1fr; gap: 24px; }
-  .hero-photo img { width: 140px; margin: 11px; }
-  .hero-title .sep { display: none; }
-  .hero-title .spec { display: block; color: var(--muted); font-size: 0.86em; margin-top: 4px; }
+  .hero-photo { order: -1; }
+  .hero-photo img { width: 160px; }
   .focus { grid-template-columns: 1fr; }
   .focus-item, .focus-item + .focus-item { padding: 20px 0; border-left: 0; }
   .focus-item + .focus-item { border-top: 1px solid color-mix(in srgb, var(--on-deep) 25%, transparent); }

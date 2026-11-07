@@ -108,13 +108,22 @@
       })
       .catch(function (err) {
         status.className = 'form-status bad';
-        var msg = String(err && err.message || '');
-        if (/activat/i.test(msg)) {
-          status.textContent = 'El formulario se está activando. Inténtalo de nuevo en unos minutos.';
-          return;
-        }
-        status.innerHTML = 'No se pudo enviar. Inténtalo de nuevo o escríbeme directamente a mi correo: <a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>';
-        if (window.console) console.warn('FormSubmit:', msg);
+        var msg = String((err && err.message) || 'sin respuesta');
+        var mail = 'mailto:' + CONTACT_EMAIL +
+          '?subject=' + encodeURIComponent('Contacto desde tu portafolio: ' + name) +
+          '&body=' + encodeURIComponent(data.message + '\n\n' + name + ' (' + data.email + ')');
+        status.innerHTML = '';
+        var p1 = document.createElement('span');
+        p1.textContent = /activat/i.test(msg)
+          ? 'El formulario aún no está activado. Mientras tanto, puedes enviarme el mensaje por correo: '
+          : 'No se pudo enviar desde aquí. Puedes enviarme el mismo mensaje por correo: ';
+        var a = document.createElement('a');
+        a.href = mail;
+        a.textContent = 'abrir mi correo con este mensaje';
+        var d = document.createElement('small');
+        d.className = 'form-detail';
+        d.textContent = 'Detalle: ' + msg;
+        status.appendChild(p1); status.appendChild(a); status.appendChild(d);
       })
       .then(function () {
         submit.disabled = false;

@@ -283,3 +283,4 @@ p { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+.form-detail { display: block; margin-top: 6px; color: var(--muted); font-size: 0.8rem; }

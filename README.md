@@ -3,13 +3,15 @@
 **Ver en vivo:** https://dayaguerrero2005.github.io/Portafolio-DW/
    
 ## Descripción  
-Portafolio web personal e interactivo desarrollado como proyecto académico para el 8vo semestre de la carrera de Ingeniería de Software en la Universidad Estatal de Milagro (UNEMI). El sitio comunica información académica, perfil profesional, habilidades técnicas categorizadas y proyectos destacados (arquitectura de TI y desarrollo de software).  
-   
+Portafolio profesional de Dayanara Guerrero, estudiante de último semestre de Ingeniería de Software en la Universidad Estatal de Milagro (UNEMI). Presenta su experiencia en soporte TI e infraestructura, sus proyectos de desarrollo, CI/CD e IoT, y un formulario de contacto que envía los mensajes directo a su correo.  
+
 ## Tecnologías Utilizadas  
-* **HTML5 Semántico:** Estructuración del contenido utilizando etiquetas como `<header>`, `<nav>`, `<section>`, `<article>`, `<form>` y `<figure>`.  
-* **CSS3 & Arquitectura Visual:** Diseño responsivo basado en CSS Grid y Flexbox. Uso de variables (CSS Custom Properties) para el sistema de diseño, modo oscuro/claro y maquetación estructurada.  
-* **Vanilla JavaScript:** Interactividad nativa para el menú móvil, filtrado dinámico de proyectos, validación de formulario mediante expresiones regulares (Regex) y persistencia del tema oscuro con `localStorage`.  
-   
+* **HTML5 semántico** con navegación accesible por teclado y enlace para saltar al contenido.  
+* **CSS3:** diseño responsivo con CSS Grid y Flexbox, variables CSS para el sistema de color y modo claro/oscuro (respeta la preferencia del sistema).  
+* **JavaScript:** menú móvil, cambio de tema con `localStorage` y validación del formulario.  
+* **FormSubmit:** envío de los mensajes del formulario al correo, sin servidor propio.  
+* **Tipografías:** Bricolage Grotesque e Instrument Sans (Google Fonts).  
+   
 ## Instrucciones de Visualización  
 **Visualización Local:**  
 1. Clonar este repositorio: `git clone https://github.com/DayaGuerrero2005/Portafolio-DW.git`  

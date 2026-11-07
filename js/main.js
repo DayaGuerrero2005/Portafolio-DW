@@ -79,17 +79,34 @@
     try { history.replaceState(null, '', window.location.pathname + '#contacto'); } catch (e) {}
   }
 
-  // Envío normal del formulario (sin fetch), para que ningún bloqueador lo corte.
+  // Envío a Web3Forms (llega a dayanararguerreroj@outlook.es).
+  // Si el navegador bloquea la conexión, se reenvía como formulario normal.
+  var sending = false;
   form.addEventListener('submit', function (e) {
+    if (sending) return; // reenvío normal de respaldo
+    e.preventDefault();
     status.className = 'form-status';
     status.textContent = '';
-    if (!validate() || form.elements._honey.value) { e.preventDefault(); return; }
-    form.elements._subject.value = 'Nuevo mensaje desde tu portafolio: ' + form.elements.name.value.trim();
-    var replyTo = form.querySelector('input[name="_replyto"]');
-    if (!replyTo) { replyTo = document.createElement('input'); replyTo.type = 'hidden'; replyTo.name = '_replyto'; form.appendChild(replyTo); }
-    replyTo.value = form.elements.email.value.trim();
+    if (!validate() || form.elements.botcheck.checked) return;
+    form.elements.subject.value = 'Nuevo mensaje desde tu portafolio: ' + form.elements.name.value.trim();
+
     submit.disabled = true;
     submit.textContent = 'Enviando…';
+
+    fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
+      .then(function (res) { return res.json(); })
+      .then(function (j) {
+        if (!j.success) throw new Error(j.message || 'error');
+        form.reset();
+        status.className = 'form-status ok';
+        status.textContent = 'Mensaje enviado. Te responderé a tu correo pronto.';
+        submit.disabled = false;
+        submit.textContent = 'Enviar mensaje';
+      })
+      .catch(function () {
+        sending = true;
+        HTMLFormElement.prototype.submit.call(form);
+      });
   });
 
   rules.forEach(function (r) {

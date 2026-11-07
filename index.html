@@ -240,11 +240,11 @@
             <li><a href="https://github.com/DayaGuerrero2005" target="_blank" rel="noopener">github.com/DayaGuerrero2005</a></li>
           </ul>
         </div>
-        <form class="form" id="contact-form" action="https://formsubmit.co/dayanararguerreroj@outlook.es" method="POST" novalidate>
-          <input type="hidden" name="_subject" value="Nuevo mensaje desde tu portafolio" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="https://dayaguerrero2005.github.io/Portafolio-DW/?enviado=1#contacto" />
+        <form class="form" id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <input type="hidden" name="access_key" value="5dd5aff1-7fd4-44aa-a4c4-d643c80dc1a4" />
+          <input type="hidden" name="subject" value="Nuevo mensaje desde tu portafolio" />
+          <input type="hidden" name="from_name" value="Portafolio Dayanara Guerrero" />
+          <input type="hidden" name="redirect" value="https://dayaguerrero2005.github.io/Portafolio-DW/?enviado=1#contacto" />
           <div class="field">
             <label for="f-name">Nombre</label>
             <input id="f-name" name="name" type="text" autocomplete="name" required minlength="2" />
@@ -260,7 +260,7 @@
             <textarea id="f-message" name="message" rows="5" required minlength="10"></textarea>
             <p class="err" id="e-message" aria-live="polite"></p>
           </div>
-          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <button class="btn btn-solid" type="submit" id="f-submit">Enviar mensaje</button>
           <p class="form-status" id="f-status" role="status"></p>
         </form>
@@ -275,6 +275,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=8"></script>
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>

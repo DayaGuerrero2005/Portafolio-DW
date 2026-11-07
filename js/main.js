@@ -106,9 +106,15 @@
         status.className = 'form-status ok';
         status.textContent = 'Mensaje enviado. Te responderé a tu correo pronto.';
       })
-      .catch(function () {
+      .catch(function (err) {
         status.className = 'form-status bad';
-        status.innerHTML = 'No se pudo enviar. Revisa tu conexión e inténtalo de nuevo, o escríbeme a <a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>.';
+        var msg = String(err && err.message || '');
+        if (/activat/i.test(msg)) {
+          status.textContent = 'El formulario se está activando. Inténtalo de nuevo en unos minutos.';
+          return;
+        }
+        status.innerHTML = 'No se pudo enviar. Inténtalo de nuevo o escríbeme directamente a mi correo: <a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>';
+        if (window.console) console.warn('FormSubmit:', msg);
       })
       .then(function () {
         submit.disabled = false;
